@@ -3,6 +3,7 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import entities.User;
 
@@ -25,9 +26,25 @@ public class Users implements InterfaceUsers {
 	}
 
 	@Override
-	public void registerUser(String name, String email, String password) {
+	public User registerUser(String name, String email, String password) {
+		if(getUserByEmail(email, users) != null && getUserByPasword(password, users) != null) {
+			return null;
+		}
+
 		User user = new User(name, email, password);
 		users.add(user);
+
+		return user;
+	}
+
+	@Override
+	public List<User> getUserByEmail(String email, List<User> users) {
+		return users.stream().filter(user -> user.getEmail() == email).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<User> getUserByPasword(String password, List<User> users) {
+		return users.stream().filter(user -> user.getPassword() == password).collect(Collectors.toList());
 	}
 
 }
