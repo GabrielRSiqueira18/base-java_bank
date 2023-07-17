@@ -1,5 +1,10 @@
+import repositories.UserRepository;
+import services.CreateUser;
+
 public class App {
 	public static void main(String[] args) throws Exception {
-			System.out.println("Hello, World!");
+		UserRepository userRepository = new UserRepository();
+
+		CreateUser createUser = new CreateUser(userRepository);
 	}
 }

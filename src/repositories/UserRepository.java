@@ -6,8 +6,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import entities.User;
+import repositories.interfaces.InterfaceUsers;
 
-public class Users implements InterfaceUsers {
+public class UserRepository implements InterfaceUsers  {
 	public List<User> users = new ArrayList<>();
 
 	@Override
@@ -38,13 +39,20 @@ public class Users implements InterfaceUsers {
 	}
 
 	@Override
-	public List<User> getUserByEmail(String email, List<User> users) {
-		return users.stream().filter(user -> user.getEmail() == email).collect(Collectors.toList());
+	public User getUserByEmail(String email, List<User> userRepository) {
+		return userRepository.stream().filter(user -> user.getEmail() == email).findFirst().orElse(null);
 	}
 
 	@Override
 	public List<User> getUserByPasword(String password, List<User> users) {
 		return users.stream().filter(user -> user.getPassword() == password).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<User> fetchUsers() {
+		return users;
+	}
+
+	
 
 }
