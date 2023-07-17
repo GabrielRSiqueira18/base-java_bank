@@ -1,7 +1,5 @@
 package services;
 
-import java.util.List;
-
 import entities.User;
 import repositories.UserRepository;
 import repositories.interfaces.InterfaceUsers;

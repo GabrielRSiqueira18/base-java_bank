@@ -12,7 +12,7 @@ public class UserRepository implements InterfaceUsers  {
 	public List<User> users = new ArrayList<>();
 
 	@Override
-	public User getUserById(UUID id, List<User> users) {
+	public User getUserById(UUID id) {
 		return users.stream().filter(user -> user.getUserId() == id).findFirst().orElse(null);
 	}
 
@@ -28,7 +28,7 @@ public class UserRepository implements InterfaceUsers  {
 
 	@Override
 	public User registerUser(String name, String email, String password) {
-		if(getUserByEmail(email, users) != null && getUserByPasword(password, users) != null) {
+		if(getUserByEmail(email) != null && getUserByPasword(password) != null) {
 			return null;
 		}
 
@@ -39,12 +39,12 @@ public class UserRepository implements InterfaceUsers  {
 	}
 
 	@Override
-	public User getUserByEmail(String email, List<User> userRepository) {
-		return userRepository.stream().filter(user -> user.getEmail() == email).findFirst().orElse(null);
+	public User getUserByEmail(String email) {
+		return users.stream().filter(user -> user.getEmail() == email).findFirst().orElse(null);
 	}
 
 	@Override
-	public List<User> getUserByPasword(String password, List<User> users) {
+	public List<User> getUserByPasword(String password) {
 		return users.stream().filter(user -> user.getPassword() == password).collect(Collectors.toList());
 	}
 
@@ -52,7 +52,4 @@ public class UserRepository implements InterfaceUsers  {
 	public List<User> fetchUsers() {
 		return users;
 	}
-
-	
-
 }
