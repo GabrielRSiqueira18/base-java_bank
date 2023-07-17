@@ -13,6 +13,7 @@ public class Bank {
 	public Bank(String name) {
 		this.name = name;
 		createdAt = LocalDate.now();
+		this.money = 0.0;
 	}
 
 	public Double getMoney() {
@@ -29,6 +30,10 @@ public class Bank {
 
 	public String getName() {
 		return name;
+	}
+
+	public String toString() {
+		return "Nome do banco: " + name + "\nO banco foi criado na data: " + createdAt + "\nDinheiro do banco: " + money;
 	}
 
 	public void withdrawn(String userEmail, double moneyWithdray) {

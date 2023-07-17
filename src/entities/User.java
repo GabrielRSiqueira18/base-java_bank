@@ -3,6 +3,8 @@ package entities;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import repositories.interfaces.InterfaceBank;
+
 public class User {
 	private final UUID ID;
 	private String name;
@@ -18,6 +20,7 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		money = 0.0;
 	}
 
 	public UUID getUserId() {
@@ -72,7 +75,24 @@ public class User {
 		this.money -= money;
 	}
 
-	public void associateUserToBank(String bankName) {
-		
+	public String toString() {
+		return "Nome: " + name +
+			"\nEmail: " + email +
+			"\nSeu dinheiro: " + money +
+			"\nBanco:\n" + bank +
+			"\nEntrou no banco na data: " + bankEnteredAt +
+			"\nDinheiro no banco: " + moneyInBank;
+	}
+
+	public void associateUserToBank(String bankName, InterfaceBank bankReposities) {
+		if(bank != null) {
+			System.out.println("Já cadastrado aa um banco\n" + bank);
+			return;
+		}
+
+		Bank bank = bankReposities.getBankByName(bankName);
+
+		this.bank = bank;
+		this.bankEnteredAt = LocalDate.now();
 	}
 }
