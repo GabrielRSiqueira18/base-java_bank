@@ -16,7 +16,7 @@ public class CreateUser {
 		String email,
 		String password
 	) {
-		User userExist = userRepository.getUserByEmail(email, userRepository.fetchUsers()); 
+		User userExist = userRepository.getUserByEmail(email); 
 
 		if(userExist != null) {
 			return null;
