@@ -6,12 +6,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import entities.User;
+import repositories.interfaces.InterfaceUsers;
 
-public class Users implements InterfaceUsers {
+public class UserRepository implements InterfaceUsers  {
 	public List<User> users = new ArrayList<>();
 
 	@Override
-	public User getUserById(UUID id, List<User> users) {
+	public User getUserById(UUID id) {
 		return users.stream().filter(user -> user.getUserId() == id).findFirst().orElse(null);
 	}
 
@@ -27,7 +28,7 @@ public class Users implements InterfaceUsers {
 
 	@Override
 	public User registerUser(String name, String email, String password) {
-		if(getUserByEmail(email, users) != null && getUserByPasword(password, users) != null) {
+		if(getUserByEmail(email) != null && getUserByPasword(password) != null) {
 			return null;
 		}
 
@@ -38,13 +39,17 @@ public class Users implements InterfaceUsers {
 	}
 
 	@Override
-	public List<User> getUserByEmail(String email, List<User> users) {
-		return users.stream().filter(user -> user.getEmail() == email).collect(Collectors.toList());
+	public User getUserByEmail(String email) {
+		return users.stream().filter(user -> user.getEmail() == email).findFirst().orElse(null);
 	}
 
 	@Override
-	public List<User> getUserByPasword(String password, List<User> users) {
+	public List<User> getUserByPasword(String password) {
 		return users.stream().filter(user -> user.getPassword() == password).collect(Collectors.toList());
 	}
 
+	@Override
+	public List<User> fetchUsers() {
+		return users;
+	}
 }
