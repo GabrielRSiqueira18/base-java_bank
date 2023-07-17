@@ -21,6 +21,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		money = 0.0;
+		this.moneyInBank = 0.0;
 	}
 
 	public UUID getUserId() {
@@ -86,12 +87,11 @@ public class User {
 
 	public void associateUserToBank(String bankName, InterfaceBank bankReposities) {
 		if(bank != null) {
-			System.out.println("Já cadastrado aa um banco\n" + bank);
+			System.out.println("Já cadastrado a um banco\n" + bank);
 			return;
 		}
 
 		Bank bank = bankReposities.getBankByName(bankName);
-
 		this.bank = bank;
 		this.bankEnteredAt = LocalDate.now();
 	}

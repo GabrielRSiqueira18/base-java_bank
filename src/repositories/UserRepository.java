@@ -17,9 +17,9 @@ public class UserRepository implements InterfaceUsers  {
 	}
 
 	@Override
-	public void listUsers(List<User> users) {
+	public void listUsers() {
+		int i = 1;
 		for(User user : users) {
-			int i = 1;
 			System.out.println("Nome do usuário " + i + ": " + user.getName());
 			System.out.println("Email do usuário " + i + ": " + user.getEmail());
 			i++;

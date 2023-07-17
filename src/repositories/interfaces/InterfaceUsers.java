@@ -9,7 +9,7 @@ public interface InterfaceUsers {
 	public User getUserById(UUID id);
 	public User getUserByEmail(String email);
 	public List<User> getUserByPasword(String password);
-	public void listUsers(List<User> users);
+	public void listUsers();
 	public User registerUser(String name, String email, String password);
 	public List<User> fetchUsers();
 }
