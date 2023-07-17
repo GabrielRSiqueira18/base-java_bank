@@ -17,9 +17,9 @@ public class UserRepository implements InterfaceUsers  {
 	}
 
 	@Override
-	public void listUsers(List<User> users) {
+	public void listUsers() {
+		int i = 1;
 		for(User user : users) {
-			int i = 1;
 			System.out.println("Nome do usuário " + i + ": " + user.getName());
 			System.out.println("Email do usuário " + i + ": " + user.getEmail());
 			i++;
@@ -28,7 +28,7 @@ public class UserRepository implements InterfaceUsers  {
 
 	@Override
 	public User registerUser(String name, String email, String password) {
-		if(getUserByEmail(email) != null && getUserByPasword(password) != null) {
+		if(getUserByEmail(email) != null) {
 			return null;
 		}
 
@@ -40,12 +40,12 @@ public class UserRepository implements InterfaceUsers  {
 
 	@Override
 	public User getUserByEmail(String email) {
-		return users.stream().filter(user -> user.getEmail() == email).findFirst().orElse(null);
+		return users.stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
 	}
 
 	@Override
 	public List<User> getUserByPasword(String password) {
-		return users.stream().filter(user -> user.getPassword() == password).collect(Collectors.toList());
+		return users.stream().filter(user -> user.getPassword().equals(password)).collect(Collectors.toList());
 	}
 
 	@Override

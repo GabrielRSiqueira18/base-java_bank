@@ -12,21 +12,22 @@ public class BankRepository implements InterfaceBank {
 	@Override
 		public Bank create(String name) {
 			Bank bank = new Bank(name);
-
+			banks.add(bank);
+			System.out.println(banks);
 			return bank;
 		}
 
 	@Override
 	public Bank getBankByName(String name) {
-		return banks.stream().filter(bank -> bank.getName() == name).findFirst().orElse(null);
+		return banks.stream().filter(bank -> bank.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	@Override
 	public void listAllBanks() {
 		for(int i = 0; i < banks.size(); i++) {
-			System.out.print("Nome do " + (i + 1) + "banco: ");
+			System.out.print("Nome do " + (i + 1) + " banco: ");
 			System.out.println(banks.get(i).getName());
-			System.out.print("Total de dinheiro do " + (i + 1) + "banco: ");
+			System.out.print("Total de dinheiro do " + (i + 1) + " banco: ");
 			System.out.println(banks.get(i).getMoney());
 		}
 	}
